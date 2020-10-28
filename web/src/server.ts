@@ -1,0 +1,57 @@
+import express from 'express'
+import next from 'next'
+import Scraper from '../../scraper/src'
+import config from './config'
+import log from './logger'
+import cacheableResponse from 'cacheable-response'
+import pMemoize from './p-memoize'
+
+const dev = process.env.NODE_ENV !== 'production'
+const app = next({ dev })
+const handle = app.getRequestHandler()
+const port = config.port
+const scraper = Scraper(config.scraperCookies, log)
+const getEventsCached1m = pMemoize(scraper.getEvents, 1000 * 60)
+
+// Hack from https://github.com/vercel/next.js/issues/16725
+const ssrCache = (cacheableResponse as any)({
+  ttl: 1000 * 60 * 10,
+  get: async ({ req, res }: any) => {
+    const rawResEnd = res.end
+    const data = await new Promise((resolve) => {
+      res.end = (payload: any) => {
+        if (res.statusCode === 200) {
+          resolve(payload)
+        } else {
+          resolve()
+        }
+      }
+      app.render(req, res, req.path, {
+        ...req.query,
+        ...req.params
+      })
+    })
+    res.end = rawResEnd
+    return { data }
+  },
+  send: ({ data, res }: any) => res.send(data)
+})
+
+app.prepare().then(() => {
+  const server = express()
+
+  server.get('/api/events', async (req, res, next) => {
+    log.info('call to /api/events')
+    try {
+      res.send(await getEventsCached1m())
+    } catch (err) {
+      next(err)
+    }
+  })
+
+  server.get('/', (req, res) => ssrCache({ req, res }))
+  server.get('*', (req, res) => handle(req, res))
+  server.listen(port, () => {
+    log.info(`ready on http://localhost:${port}`)
+  })
+})
