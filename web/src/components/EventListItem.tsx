@@ -1,8 +1,8 @@
-import { LaserTagEvent, LaserTagVenueId } from '../../../scraper/src/types'
-import { DateTime } from 'luxon'
-import styles from './EventListItem.module.scss'
 import classNames from 'classnames'
+import { DateTime } from 'luxon'
+import { LaserTagEvent, LaserTagVenueId } from '../../../scraper/src/types'
 import Chevron from './Chevron'
+import styles from './EventListItem.module.scss'
 
 function capitalize(str: string): string {
   return str[0].toUpperCase() + str.substr(1)
@@ -38,7 +38,7 @@ function Venue({ venueId }: { venueId: LaserTagVenueId }) {
   return (
     <div
       className={classNames(
-        'text-white font-semibold text-sm inline-flex px-1 rounded text-shadow-sm',
+        'text-white font-medium text-sm inline-flex px-1 rounded text-shadow-sm',
         styles.textShadow,
         {
           'bg-venue-blue': venueId === 'hki',
@@ -53,11 +53,11 @@ function Venue({ venueId }: { venueId: LaserTagVenueId }) {
 
 export default function EventListItem(event: LaserTagEvent) {
   return (
-    <div className="flex flex-col pt-3 pb-3 border-b first:pt-0 border-black-e8">
+    <div className="flex flex-col pt-3 pb-4 border-b border-b-0 first:pt-0 border-black-f0">
       <a href={event.registrationUrl}>
         <div className="flex flex-row">
           <div className="flex-grow">
-            <h2 className="text-2xl font-semibold leading-none text-black text-black-333">
+            <h2 className="text-2xl font-medium leading-none text-black text-black-333">
               {fixEventTitle(event.title)}
             </h2>
             <div className="flex items-center mt-1 text-black-222">

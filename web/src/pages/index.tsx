@@ -12,11 +12,13 @@ export default function Index(
   props: InferGetServerSidePropsType<typeof getServerSideProps>
 ) {
   const [events, setEvents] = useState<LaserTagEvent[]>(props.events)
+
   useEffect(() => {
     getEvents().then(setEvents)
   }, [])
+
   return (
-    <div className="p-4 sm:m-auto sm:shadow-xl sm:max-w-lg sm:mt-8">
+    <div className="p-4 bg-white sm:m-auto sm:shadow-xl sm:max-w-lg sm:pt-8">
       <EventList events={events} />
     </div>
   )

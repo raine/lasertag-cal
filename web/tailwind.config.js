@@ -14,9 +14,11 @@ module.exports = {
       },
       colors: {
         black: {
+          555: '#555555',
           333: '#333333',
           222: '#222222',
-          e8: '#e8e8e8'
+          e8: '#e8e8e8',
+          f0: '#f0f0f0'
         },
         venue: {
           blue: '#4299E2',
@@ -31,8 +33,9 @@ module.exports = {
     }
   },
   variants: {
-    padding: ['first'],
-    margin: ['responsive', 'last']
+    padding: ['responsive', 'first'],
+    margin: ['responsive', 'last'],
+    borderWidth: ['last']
   },
   plugins: [require('tailwindcss-textshadow')]
 }
