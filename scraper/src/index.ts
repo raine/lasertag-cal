@@ -27,7 +27,15 @@ const getVenueEvents = (auth: LaserTagAuth, log: Logger) => (
 const getEvents = (
   getVenueEventsWithAuth: (venue: LaserTagVenue) => Promise<LaserTagEvent[]>
 ): Promise<LaserTagEvent[]> =>
-  Promise.all(VENUES.map(getVenueEventsWithAuth)).then((xs) => xs.flat())
+  Promise.all(VENUES.map(getVenueEventsWithAuth)).then((xs) =>
+    xs
+      .flat()
+      .sort(
+        (a, b) =>
+          DateTime.fromISO(a.startDate).toMillis() -
+          DateTime.fromISO(b.startDate).toMillis()
+      )
+  )
 
 const getEventsListHtml = (auth: LaserTagAuth, log: Logger) => async (
   venue: LaserTagVenue
