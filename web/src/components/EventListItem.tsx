@@ -35,6 +35,15 @@ function Venue({ venueId }: { venueId: LaserTagVenueId }) {
     }
   })()
 
+  const city = (() => {
+    switch (venueId) {
+      case 'hki':
+        return `Helsinki`
+      case 'vnt':
+        return 'Vantaa'
+    }
+  })()
+
   return (
     <div
       className={classNames(
@@ -45,6 +54,7 @@ function Venue({ venueId }: { venueId: LaserTagVenueId }) {
           'bg-venue-red': venueId === 'vnt'
         }
       )}
+      title={`${name}, ${city}`}
     >
       {name}
     </div>
