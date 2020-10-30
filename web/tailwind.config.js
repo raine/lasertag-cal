@@ -13,6 +13,7 @@ module.exports = {
         '2px': '2px'
       },
       colors: {
+        'error-red': '#D10000',
         black: {
           555: '#555555',
           333: '#333333',

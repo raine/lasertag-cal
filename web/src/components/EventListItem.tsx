@@ -1,8 +1,10 @@
 import classNames from 'classnames'
-import { DateTime } from 'luxon'
+import { DateTime, IANAZone } from 'luxon'
 import { LaserTagEvent, LaserTagVenueId } from '../../../scraper/src/types'
 import Chevron from './Chevron'
 import styles from './EventListItem.module.scss'
+
+const zone = IANAZone.create('Europe/Helsinki')
 
 function capitalize(str: string): string {
   return str[0].toUpperCase() + str.substr(1)
@@ -19,6 +21,21 @@ function fixEventTitle(title: string): string {
     .replace(' - Gp ry / Laser Tag Urheilijat Helsinki', '')
     .replace(' / Laser Tag Urheilijat Helsinki', '')
     .trim()
+}
+
+function CancelWarning({
+  event,
+  now = DateTime.local().setZone(zone)
+}: {
+  event: LaserTagEvent
+  now?: DateTime
+}) {
+  const dt = DateTime.fromISO(event.startDate, { zone })
+  return dt.hasSame(now, 'day') && now.hour < 14 ? (
+    <div className="mt-2 text-sm text-error-red">
+      Puuttuu {10 - event.reservedSlots} hlö – perutaan klo 14:00
+    </div>
+  ) : null
 }
 
 function Separator() {
@@ -78,6 +95,7 @@ export default function EventListItem(event: LaserTagEvent) {
             <div className="mt-2px">
               <Venue venueId={event.venueId} />
             </div>
+            <CancelWarning event={event} />
           </div>
           <div className="flex items-center pr-2">
             <Chevron />
