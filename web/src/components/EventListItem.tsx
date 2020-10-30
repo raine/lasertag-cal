@@ -12,6 +12,7 @@ function capitalize(str: string): string {
 
 function formatISODate(date: string): string {
   return DateTime.fromISO(date)
+    .setZone(zone)
     .setLocale('fi')
     .toFormat(`EEE d.M.y 'klo' HH:mm`)
 }
