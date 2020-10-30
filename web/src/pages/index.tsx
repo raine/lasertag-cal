@@ -5,7 +5,7 @@ import React, { useEffect, useState } from 'react'
 import EventList from 'components/EventList'
 
 function getEvents(): Promise<LaserTagEvent[]> {
-  return ky.get('http://localhost:3000/api/events').json()
+  return ky.get(process.env.NEXT_PUBLIC_API_URL + '/api/events').json()
 }
 
 export default function Index(
