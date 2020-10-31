@@ -16,8 +16,8 @@ export default function EventList({ events }: Props) {
             .map((event) => <EventListItem key={event.eventId} {...event} />)
         : null}
       {!events.length ? (
-        <div className="pt-4 pb-2 text-2xl text-center text-black-333">
-          Ei pelejä kalenterissa.
+        <div className="pb-4 text-2xl text-center border-b text-black-333">
+          Ei pelejä kalenterissa
         </div>
       ) : null}
       <LtuhFacebookLink />

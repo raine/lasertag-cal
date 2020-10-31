@@ -19,6 +19,9 @@ export default function Index(
 
   return (
     <div className="p-4 bg-white sm:m-auto sm:shadow-xl sm:max-w-lg sm:pt-8">
+      <h1 className="mb-4 text-lg border-b text-black-333">
+        Tulevat jäsenillat
+      </h1>
       <EventList events={events} />
     </div>
   )
