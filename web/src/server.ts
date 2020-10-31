@@ -71,4 +71,9 @@ app.prepare().then(() => {
   }
 
   if (!dev) cacheWarmupLoop()
+
+  process.on('SIGTERM', () => {
+    log.info('received SIGTERM')
+    process.exit(0)
+  })
 })
