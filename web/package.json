@@ -11,7 +11,7 @@
     "test": "run-p -l 'test:*'",
     "watch:jest": "jest --watchAll",
     "run-script-dev": "ts-node-dev --ignore-watch .next --files --no-notify --respawn --project tsconfig.json",
-    "dev": "yarn run-script-dev src/server.ts"
+    "dev": "NEXT_PUBLIC_API_URL=http://localhost:3000 yarn run-script-dev src/server.ts"
   },
   "dependencies": {
     "cacheable-response": "^2.1.7",

@@ -1,5 +1,6 @@
 import express from 'express'
 import next from 'next'
+import got from 'got'
 import Scraper from '../../scraper/src'
 import config from './config'
 import log from './logger'
@@ -62,4 +63,12 @@ app.prepare().then(() => {
   server.listen(port, () => {
     log.info(`ready on http://localhost:${port}`)
   })
+
+  async function cacheWarmupLoop() {
+    const res = await got(`http://localhost:${port}/`)
+    const maxAge = res.headers['cache-control']?.match(/max-age=(\d+)/)?.[1]
+    if (maxAge) setTimeout(cacheWarmupLoop, (parseInt(maxAge) + 1) * 1000)
+  }
+
+  if (!dev) cacheWarmupLoop()
 })
