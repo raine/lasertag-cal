@@ -1,6 +1,6 @@
 import * as t from 'io-ts'
+import { NonNegative } from './NonNegative'
 import { NonEmptyString } from 'io-ts-types'
-// import { validDate } from './validDate'
 
 export const LaserTagVenueId = t.keyof({
   hki: null,
@@ -10,11 +10,11 @@ export const LaserTagVenueId = t.keyof({
 export type LaserTagVenueId = t.TypeOf<typeof LaserTagVenueId>
 
 export const LaserTagEvent = t.type({
-  startDate: t.string,
+  startDate: NonEmptyString,
   eventId: NonEmptyString,
   title: NonEmptyString,
-  maxSlots: t.number,
-  reservedSlots: t.number,
+  maxSlots: NonNegative,
+  reservedSlots: NonNegative,
   registrationUrl: NonEmptyString,
   venueId: LaserTagVenueId
 })
