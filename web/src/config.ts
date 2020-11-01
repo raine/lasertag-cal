@@ -4,13 +4,15 @@ import * as fs from 'fs'
 import { formatValidationErrors } from 'io-ts-reporters'
 import { fold } from 'fp-ts/lib/Either'
 import { pipe } from 'fp-ts/lib/function'
+import { NonEmptyString } from 'io-ts-types/lib/NonEmptyString'
 
 const Config = t.type({
   scraperCookies: t.type({
     hki: t.string,
     vnt: t.string
   }),
-  port: t.number
+  port: t.number,
+  sentryDsn: t.union([NonEmptyString, t.undefined])
 })
 
 type Config = t.TypeOf<typeof Config>

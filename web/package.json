@@ -14,6 +14,7 @@
     "dev": "NEXT_PUBLIC_API_URL=http://localhost:3000 yarn run-script-dev src/server.ts"
   },
   "dependencies": {
+    "@sentry/node": "^5.27.2",
     "cacheable-response": "^2.1.7",
     "classnames": "^2.2.6",
     "express": "^4.17.1",

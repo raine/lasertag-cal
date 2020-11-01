@@ -1,8 +1,10 @@
+import config from './config'
+const Sentry = require('@sentry/node')
+Sentry.init({ dsn: config.sentryDsn, tracesSampleRate: 1.0 })
 import express from 'express'
 import next from 'next'
 import got from 'got'
 import Scraper from '../../scraper/src'
-import config from './config'
 import log from './logger'
 import cacheableResponse from 'cacheable-response'
 import pMemoize from './p-memoize'
@@ -50,6 +52,7 @@ app.prepare().then(() => {
     try {
       cachedEvents = await getEventsMemoized1m()
     } catch (err) {
+      Sentry.captureException(err)
       log.error(err)
     } finally {
       res.send(cachedEvents)
@@ -76,4 +79,9 @@ app.prepare().then(() => {
     log.info('received SIGTERM')
     process.exit(0)
   })
+})
+
+process.on('unhandledRejection', (err) => {
+  log.error('unhandled rejection', err)
+  Sentry.captureException(err)
 })
