@@ -20,7 +20,9 @@ type Config = t.TypeOf<typeof Config>
 const configPath =
   process.env.LASERTAG_CAL_CONFIG ??
   path.join(__dirname, '..', '..', 'config.json')
+
 if (!configPath) throw new Error(`Config path not set`)
+
 const json = JSON.parse(fs.readFileSync(configPath, 'utf8'))
 const result = Config.decode(json)
 const config = pipe(
