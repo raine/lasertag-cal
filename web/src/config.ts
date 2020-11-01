@@ -5,11 +5,12 @@ import { formatValidationErrors } from 'io-ts-reporters'
 import { fold } from 'fp-ts/lib/Either'
 import { pipe } from 'fp-ts/lib/function'
 import { NonEmptyString } from 'io-ts-types/lib/NonEmptyString'
+import { LoginDetails } from '../../scraper/src/types'
 
 const Config = t.type({
-  scraperCookies: t.type({
-    hki: t.string,
-    vnt: t.string
+  scraperLoginDetails: t.type({
+    hki: LoginDetails,
+    vnt: LoginDetails
   }),
   port: t.number,
   sentryDsn: t.union([NonEmptyString, t.undefined])

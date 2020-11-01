@@ -27,4 +27,11 @@ export type LaserTagVenue = {
   baseUrl: string
 }
 
-export type LaserTagAuth = { [k in LaserTagVenueId]: string }
+export const LoginDetails = t.type({
+  username: NonEmptyString,
+  password: NonEmptyString
+})
+
+export type LoginDetails = t.TypeOf<typeof LoginDetails>
+
+export type LaserTagAuth = { [k in LaserTagVenueId]: LoginDetails }

@@ -19,6 +19,7 @@
     "@types/cheerio": "^0.22.22",
     "@types/luxon": "^1.25.0",
     "@types/pino": "^6.3.3",
+    "@types/tough-cookie": "^4.0.0",
     "nock": "^13.0.4"
   }
 }

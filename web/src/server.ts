@@ -1,4 +1,5 @@
 import config from './config'
+import { CookieJar } from 'tough-cookie'
 const Sentry = require('@sentry/node')
 Sentry.init({ dsn: config.sentryDsn, tracesSampleRate: 1.0 })
 import express from 'express'
@@ -14,7 +15,8 @@ const dev = process.env.NODE_ENV !== 'production'
 const app = next({ dev })
 const handle = app.getRequestHandler()
 const port = config.port
-const scraper = Scraper(config.scraperCookies, log)
+const cookieJar = new CookieJar()
+const scraper = Scraper(config.scraperLoginDetails, cookieJar, log)
 
 const getEventsMemoized1m = pMemoize(scraper.getEvents, 1000 * 60)
 
