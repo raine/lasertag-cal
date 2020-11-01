@@ -63,19 +63,21 @@ function Venue({ venueId }: { venueId: LaserTagVenueId }) {
   })()
 
   return (
-    <div
-      className={classNames(
-        'text-white font-medium text-sm inline-flex px-1 rounded text-shadow-sm',
-        styles.textShadow,
-        {
-          'bg-venue-blue': venueId === 'hki',
-          'bg-venue-red': venueId === 'vnt'
-        }
-      )}
-      title={`${name}, ${city}`}
-    >
-      {name}
-    </div>
+    <a href={`https://mz${venueId}.slsystems.fi/booking-entry/index`}>
+      <div
+        className={classNames(
+          'text-white font-medium text-sm inline-flex px-1 rounded text-shadow-sm',
+          styles.textShadow,
+          {
+            'bg-venue-blue': venueId === 'hki',
+            'bg-venue-red': venueId === 'vnt'
+          }
+        )}
+        title={`${name}, ${city}`}
+      >
+        {name}
+      </div>
+    </a>
   )
 }
 
