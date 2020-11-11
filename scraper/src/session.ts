@@ -11,7 +11,7 @@ export async function login(
   venue: LaserTagVenue,
   username: string,
   password: string
-) {
+): Promise<CookieJar> {
   // https://github.com/sindresorhus/got/issues/1082
   let res = await got(venue.baseUrl + '/site/login', {
     cookieJar: compatCookieJar(cookieJar) as CookieJar
