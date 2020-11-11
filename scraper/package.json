@@ -7,10 +7,10 @@
   },
   "dependencies": {
     "cheerio": "^1.0.0-rc.3",
-    "fp-ts": "^2.8.4",
-    "got": "^11.7.0",
-    "io-ts": "^2.2.11",
-    "io-ts-types": "^0.5.11",
+    "fp-ts": "^2.8.5",
+    "got": "^11.8.0",
+    "io-ts": "^2.2.12",
+    "io-ts-types": "^0.5.12",
     "luxon": "^1.25.0",
     "monocle-ts": "^2.3.3",
     "newtype-ts": "^0.3.4",
@@ -21,6 +21,6 @@
     "@types/luxon": "^1.25.0",
     "@types/pino": "^6.3.3",
     "@types/tough-cookie": "^4.0.0",
-    "nock": "^13.0.4"
+    "nock": "^13.0.5"
   }
 }
