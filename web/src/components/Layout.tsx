@@ -8,7 +8,7 @@ export default function Layout({ children }: { children: React.ReactNode }) {
           href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Condensed:wght@400;500;600&display=swap"
           rel="stylesheet"
         />
-        <title>Laser Tag -jäsenpelit</title>
+        <title>Laser Tag -jäsenpelikalenteri</title>
       </Head>
       {children}
     </>
