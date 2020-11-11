@@ -32,7 +32,10 @@ function CancelWarning({
   now?: DateTime
 }) {
   const dt = DateTime.fromISO(event.startDate, { zone })
-  return dt.hasSame(now, 'day') && now.hour < 14 && event.reservedSlots < 10 ? (
+  return dt.hasSame(now, 'day') &&
+    now.hour > 8 &&
+    now.hour < 14 &&
+    event.reservedSlots < 10 ? (
     <div className="mt-2 text-sm text-error-red">
       Puuttuu {10 - event.reservedSlots} pelaajaa – perutaan klo 14:00
     </div>
