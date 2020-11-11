@@ -83,6 +83,16 @@ function Venue({ venueId }: { venueId: LaserTagVenueId }) {
 
 export default function EventListItem(event: LaserTagEvent) {
   const title = fixEventTitle(event.title)
+  const description = (() => {
+    switch (title) {
+      case 'Kisapelaajien jäsenilta':
+        return 'Vain kisapelaajille ja kisaamisesta kiinnostuneille kokeneille pelaajille'
+      case 'Jäsenilta':
+        return 'Kaikille avoin jäsenilta'
+      case 'Uusien pelaajien peli-ilta':
+        return 'Uusille ja aloitteleville pelaajille tarkoitettu jäsenilta'
+    }
+  })()
   return (
     <div className="flex flex-col pt-3 pb-4 border-b border-b-0 first:pt-0 border-black-f0">
       <a href={event.registrationUrl}>
@@ -91,18 +101,9 @@ export default function EventListItem(event: LaserTagEvent) {
             <h2 className="text-2xl font-medium leading-none text-black text-black-333">
               {title}
             </h2>
-            <div className="mt-2 text-sm text-black-555">
-              {(() => {
-                switch (title) {
-                  case 'Kisapelaajien jäsenilta':
-                    return 'Vain kisapelaajille ja kisaamisesta kiinnostuneille kokeneille pelaajille'
-                  case 'Jäsenilta':
-                    return 'Kaikille avoin jäsenilta'
-                  case 'Uusien pelaajien peli-ilta':
-                    return 'Uusille ja aloitteleville pelaajille tarkoitettu jäsenilta'
-                }
-              })()}
-            </div>
+            {description ? (
+              <div className="mt-2 text-sm text-black-555">{description}</div>
+            ) : null}
             <div className="flex items-center mt-1 text-black-222">
               {capitalize(formatISODate(event.startDate))}
               <Separator />
