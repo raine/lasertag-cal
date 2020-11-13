@@ -1,8 +1,9 @@
-import { LaserTagEvent } from '../../../scraper/src/types'
-import { InferGetServerSidePropsType } from 'next'
-import ky from 'ky/umd'
-import React, { useEffect, useState } from 'react'
 import EventList from 'components/EventList'
+import LtuhFacebookLink from 'components/LtuhFacebookLink'
+import ky from 'ky/umd'
+import { InferGetServerSidePropsType } from 'next'
+import React, { useEffect, useState } from 'react'
+import { LaserTagEvent } from '../../../scraper/src/types'
 
 function getEvents(): Promise<LaserTagEvent[]> {
   return ky.get(process.env.NEXT_PUBLIC_API_URL + '/api/events').json()
@@ -23,6 +24,7 @@ export default function Index(
         Tulevat jäsenillat
       </h1>
       <EventList events={events} />
+      <LtuhFacebookLink />
     </div>
   )
 }

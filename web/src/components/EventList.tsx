@@ -20,7 +20,6 @@ export default function EventList({ events }: Props) {
           Ei pelejä kalenterissa
         </div>
       ) : null}
-      <LtuhFacebookLink />
     </div>
   )
 }
