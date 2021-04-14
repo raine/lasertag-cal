@@ -83,7 +83,7 @@ app.prepare().then(() => {
   })
 })
 
-process.on('unhandledRejection', (err) => {
-  log.error('unhandled rejection', err)
+process.on('unhandledRejection', (err: any) => {
+  log.error(err, 'unhandled rejection')
   Sentry.captureException(err)
 })
