@@ -1,7 +1,6 @@
 import React from 'react'
 import { LaserTagEvent } from '../../../scraper/src/types'
 import EventListItem from './EventListItem'
-import LtuhFacebookLink from './LtuhFacebookLink'
 
 type Props = {
   events: LaserTagEvent[]

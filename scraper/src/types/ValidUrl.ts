@@ -10,6 +10,7 @@ function isValidUrl(val: unknown): val is string {
   }
 }
 
+// eslint-disable-next-line @typescript-eslint/no-empty-interface
 export interface ValidUrlC extends t.Type<string, string, unknown> {}
 
 export const ValidUrl: ValidUrlC = fromRefinement('ValidUrl', isValidUrl)
