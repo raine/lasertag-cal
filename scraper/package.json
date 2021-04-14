@@ -4,7 +4,9 @@
   "private": true,
   "scripts": {
     "build": "tsc",
-    "test": "jest"
+    "test:lint": "eslint '**/*.ts'",
+    "test:types": "tsc --incremental --noEmit",
+    "test": "run-p -l 'test:*'"
   },
   "dependencies": {
     "cheerio": "^1.0.0-rc.3",
