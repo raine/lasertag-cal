@@ -56,7 +56,6 @@ app.prepare().then(() => {
     } catch (err) {
       Sentry.captureException(err)
       log.error(err)
-      res.sendStatus(500)
     } finally {
       res.send(cachedEvents)
     }
