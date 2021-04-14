@@ -27,7 +27,7 @@ const ssrCache = (cacheableResponse as any)({
   ttl: 1000 * 60 * 10,
   get: async ({ req, res }: any) => {
     const rawResEnd = res.end
-    const data = await new Promise((resolve) => {
+    const data = await new Promise<void>((resolve) => {
       res.end = (payload: any) => {
         if (res.statusCode === 200) {
           resolve(payload)
@@ -56,6 +56,7 @@ app.prepare().then(() => {
     } catch (err) {
       Sentry.captureException(err)
       log.error(err)
+      res.sendStatus(500)
     } finally {
       res.send(cachedEvents)
     }
