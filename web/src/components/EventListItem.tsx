@@ -31,12 +31,13 @@ function CancelWarning({
   event: LaserTagEvent
   now?: DateTime
 }) {
+  const minPlayersNeeded = 12
   const dt = DateTime.fromISO(event.startDate, { zone })
-  const missing = 10 - event.reservedSlots
+  const missing = minPlayersNeeded - event.reservedSlots
   return dt.hasSame(now, 'day') &&
     now.hour > 8 &&
     now.hour < 14 &&
-    event.reservedSlots < 10 ? (
+    event.reservedSlots < minPlayersNeeded ? (
     <div className="mt-2 text-sm text-error-red">
       Puuttuu {missing} pelaaja{missing !== 1 ? 'a' : ''} – perutaan klo 14:00
     </div>
