@@ -7,12 +7,16 @@ type Props = {
 }
 
 export default function EventList({ events }: Props) {
+  const filteredEvents = events.filter((event) =>
+    event.title.match(/jäsenilta|peli-ilta|urheilijat/i)
+  )
+
   return (
     <div>
       {events.length
-        ? events
-            .filter((event) => event.title.match(/jäsenilta|peli-ilta/i))
-            .map((event) => <EventListItem key={event.eventId} {...event} />)
+        ? filteredEvents.map((event) => (
+            <EventListItem key={event.eventId} {...event} />
+          ))
         : null}
       {!events.length ? (
         <div className="pb-4 text-2xl text-center border-b text-black-333">
